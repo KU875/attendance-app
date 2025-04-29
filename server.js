@@ -1,9 +1,10 @@
 const express = require("express");
 const Sqlite = require("sqlite3");
 const cors = require("cors");
-
+const path= require("path")
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 10000;
+app.use(express.static(__dirname));
 app.use(express.json());
 app.use(cors());
 
@@ -25,16 +26,10 @@ db.run(`
 
 
 app.get("/", (req, res) => {
-  db.all(`SELECT * FROM attendanceList ORDER BY created_at DESC`, (err, rows) => {
-    if (err) {
-      console.log(err);
-      return res.status(500);
-    }
+  res.sendFile(path.join(__dirname, "index.html"));
 
-    const response = res.json(rows);
-    console.log("this is the response", response);
-    return response;
-  });
+});
+app.get("/api/attendance", (req, res) => {
 });
 app.get("/grade/:id", (req, res) => {
   const id = req.params.id

@@ -4,6 +4,7 @@ const searchBox = document.getElementById("search-Box");
 const userNameInput = document.getElementById("userNameId");
 const locationInput = document.getElementById("locationId");
 const ageInput = document.getElementById("ageId");
+const gradeinput=document.getElementById("gradeid");
 const submitForm = document.getElementById("submitForm");
 const studentModel = document.getElementById("studentModel");
 const closeModel = document.getElementById("closeModel");
@@ -19,12 +20,14 @@ const editStudent = document.getElementById("editStudent");
 let userName = "";
 let userLocation = "";
 let userAge = "";
+let usergrade="";
 let clickedStudentId;
+const API_URL=`https://attendance-app-hyw4.onrender.com`
 
-if (userNameInput && locationInput && ageInput) {
+if (userNameInput && locationInput && ageInput && inpu) {
   userNameInput.addEventListener("keyup", (event) => {
     userName = event.target.value;
-  });
+  });   
 
   locationInput.addEventListener("keyup", (event) => {
     userLocation = event.target.value;
@@ -54,7 +57,7 @@ function saveUserData() {
     return console.log("you must provide all field");
   }
 
-  fetch("http://localhost:3000/api/save", {
+  fetch(`${API_URL}/api/save`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -110,7 +113,7 @@ function getAllData() {
 }
 
 const studentData = () => {
-  fetch(`http://localhost:3000/student/${clickedStudentId}`, {
+  fetch(`${API_URL}/student/${clickedStudentId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -204,7 +207,7 @@ if (window.location.href.split("?")[1]) {
 } else {
   if (studentModel) {
     studentModel.classList = "hideTable";
-  }
+   }
  
 }
 
@@ -235,3 +238,4 @@ function showTableData(subjectSelected,TypeSelected,point,maxPoint) {
   }
 }
 console.log(window.ononline);
+ 
