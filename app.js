@@ -24,7 +24,7 @@ let usergrade="";
 let clickedStudentId;
 const API_URL=`https://attendance-app-hyw4.onrender.com`
 
-if (userNameInput && locationInput && ageInput && inpu) {
+if (userNameInput && locationInput && ageInput && gradeinput) {
   userNameInput.addEventListener("keyup", (event) => {
     userName = event.target.value;
   });   
@@ -36,7 +36,9 @@ if (userNameInput && locationInput && ageInput && inpu) {
   ageInput.addEventListener("keyup", (event) => {
     userAge = event.target.value;
   });
-
+  gradeinput.addEventListener("keyup", (event) => {
+    usergrade = event.target.value;
+  });
   submitForm.addEventListener("submit", (e) => {
     e.preventDefault();
     saveUserData();
@@ -93,17 +95,21 @@ function getAllData() {
         locationTdata.className = "user_list";
         const ageTdata = document.createElement("td");
         ageTdata.className = "user_list";
+        const gradeTdata=document.createElement("td")
+        gradeTdata.className="user_list";
 
         idTdata.innerText = `${idx + 1}`;
         userNameTdata.innerHTML = `${item.username}`;
         userNameTdata.id = "user_Tdata";
         locationTdata.innerText = `${item.location}`;
         ageTdata.innerText = `${item.age}`;
+        gradeTdata.innerText=`${item.grade}`;
 
         list.appendChild(idTdata);
         list.appendChild(userNameTdata);
         list.appendChild(locationTdata);
         list.appendChild(ageTdata);
+        list.appendChild(gradeTdata);
         if (table_list) {
           table_list.appendChild(list);
         }
